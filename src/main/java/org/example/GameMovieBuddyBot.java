@@ -9,12 +9,12 @@ public class GameMovieBuddyBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return BotConfig.BOT_USERNAME;
+        return BotConfig.getBotUsername();
     }
 
     @Override
     public String getBotToken() {
-        return BotConfig.BOT_TOKEN;
+        return BotConfig.getBotToken();
     }
 
     @Override
