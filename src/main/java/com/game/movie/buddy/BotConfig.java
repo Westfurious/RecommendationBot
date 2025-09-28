@@ -1,4 +1,4 @@
-package org.example;
+package com.game.movie.buddy;
 
 import java.io.File;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package org.example;
+package com.game.movie.buddy;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;

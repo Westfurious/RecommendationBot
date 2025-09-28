@@ -2,5 +2,6 @@ package model;
 
 public class Platform {
     public String name;
-    public String value;
+
+    public String getName() { return name; }
 }
