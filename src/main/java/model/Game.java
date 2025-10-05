@@ -5,6 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class Game {
+    private String xUrl;
+    private double meanPlayers;
+    private double meanCritics;
+    private double countPlayers;
+    private double countCritics;
     private int id;
     private int year; // теперь целое число
     private String name;
