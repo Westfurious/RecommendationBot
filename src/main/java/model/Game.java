@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+/**
+ * Модель игры из GameBrain API.
+ * Содержит основную информацию: название, жанр, рейтинг, платформы, описание.
+ */
+
 public class Game {
     private String xUrl;
-    private double meanPlayers;
-    private double meanCritics;
-    private double countPlayers;
-    private double countCritics;
     private int id;
     private int year; // теперь целое число
     private String name;
@@ -28,6 +29,9 @@ public class Game {
     public Game() {}
 
     // Геттеры и сеттеры
+    public String getXUrl() { return xUrl; }
+    public void setXUrl(String xUrl) { this.xUrl = xUrl; }
+
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

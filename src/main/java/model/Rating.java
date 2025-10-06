@@ -4,4 +4,8 @@ package model;
 public class Rating {
     public double mean;
     public double count;
+    private double meanPlayers;
+    private double meanCritics;
+    private double countPlayers;
+    private double countCritics;
 }
