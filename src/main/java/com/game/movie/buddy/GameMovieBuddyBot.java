@@ -1,4 +1,4 @@
-package org.example;
+package com.game.movie.buddy;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -9,12 +9,12 @@ public class GameMovieBuddyBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return BotConfig.BOT_USERNAME;
+        return BotConfig.getBotUsername();
     }
 
     @Override
     public String getBotToken() {
-        return BotConfig.BOT_TOKEN;
+        return BotConfig.getBotToken();
     }
 
     @Override
