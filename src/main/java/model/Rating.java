@@ -8,4 +8,7 @@ public class Rating {
     private double meanCritics;
     private double countPlayers;
     private double countCritics;
+
+    public double getMean() { return mean; }
+    public double getCount() { return count; }
 }
