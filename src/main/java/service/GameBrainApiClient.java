@@ -55,7 +55,6 @@ public class GameBrainApiClient {
             if (!response.isSuccessful()) throw new IOException("Game not found " + response);
 
             String responseBody = response.body().string();
-            //GameBrainResponse wrapper = objectMapper.readValue(responseBody, GameBrainResponse.class);
             return objectMapper.readValue(responseBody, Game.class);
         }
     }

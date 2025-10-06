@@ -1,5 +1,6 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
  * Модель игры из GameBrain API.
  * Содержит основную информацию: название, жанр, рейтинг, платформы, описание.
  */
-
+@JsonIgnoreProperties(ignoreUnknown = true) // Без этой аннотации Jackson упадёт если увидит поле в Json которого нету в классе
 public class Game {
     private String xUrl;
     private int id;
