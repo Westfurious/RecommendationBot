@@ -18,7 +18,7 @@ public class GameBrainApiClient {
     private final OkHttpClient httpClient = new OkHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
     {
-        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE); // JSON поля форматировались в camel
     }
 
     public List<Game> searchGames(String query) throws IOException {
@@ -40,6 +40,23 @@ public class GameBrainApiClient {
             String responseBody = response.body().string();
             GameBrainResponse wrapper = objectMapper.readValue(responseBody, GameBrainResponse.class);
             return wrapper.results;
+        }
+    }
+    public Game getGameById(int id) throws IOException {
+        HttpUrl url = HttpUrl.parse(BASE_URL + "/v1/games/" + id);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .addHeader("x-api-key",API_KEY)
+                .build();
+
+        try (Response response = httpClient.newCall(request).execute()) {
+            if (!response.isSuccessful()) throw new IOException("Game not found " + response);
+
+            String responseBody = response.body().string();
+            //GameBrainResponse wrapper = objectMapper.readValue(responseBody, GameBrainResponse.class);
+            return objectMapper.readValue(responseBody, Game.class);
         }
     }
 }
