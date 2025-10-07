@@ -1,8 +1,6 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 /**
@@ -13,13 +11,13 @@ import java.util.List;
 public class Game {
     private String xUrl;
     private int id;
-    private int year; // теперь целое число
+    private int year;
     private String name;
     private String genre;
     private String image;
     private String link;
     private Rating rating;
-    private boolean adult_only;
+    private boolean adultOnly;
     private String shortDescription;
     private List<String> screenshots;
     private String microTrailer;
@@ -54,8 +52,8 @@ public class Game {
     public Rating getRating() { return rating; }
     public void setRating(Rating rating) { this.rating = rating; }
 
-    public boolean isAdult_only() { return adult_only; }
-    public void setAdult_only(boolean adult_only) { this.adult_only = adult_only; }
+    public boolean isAdult_only() { return adultOnly; }
+    public void setAdult_only(boolean adultOnly) { this.adultOnly = adultOnly; }
 
     public String getShortDescription() { return shortDescription; }
     public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }

@@ -1,48 +1,69 @@
 package com.game.movie.buddy;
 
-import java.io.File;
-import java.util.Scanner;
-import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 
 public class BotConfig {
-    private static String botUsername;
-    private static String botToken;
+    private static final Map<String, String> config = new HashMap<String, String>();
 
     static {
         loadConfigFromEnv();
     }
 
     private static void loadConfigFromEnv() {
-        try {
-            Scanner scanner = new Scanner(new File(".env"));
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine().trim();
-                if (line.startsWith("BOT_USERNAME=")) {
-                    botUsername = line.substring(13);
-                } else if (line.startsWith("BOT_TOKEN=")) {
-                    botToken = line.substring(10);
-                }
-            }
-            scanner.close();
+        try (BufferedReader reader = new BufferedReader(new FileReader(".env"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
 
-            if (botUsername == null || botToken == null) {
-                throw new RuntimeException("Не удалось загрузить конфиг из .env файла");
+                if (line.isEmpty() || line.startsWith("#")) continue;
+
+                String[] parts = line.split("=");
+                if (parts.length == 2) {
+                String key = parts[0].trim();
+                String value = parts[1].trim();
+                config.put(key, value);}
             }
 
-        } catch (FileNotFoundException e) {
-            System.err.println("Файл .env не найден");
-            System.exit(1);
-        } catch (Exception e) {
-            System.err.println("Ошибка загрузки конфига: " + e.getMessage());
+            validateRequired("BOT_USERNAME", "BOT_TOKEN");
+
+        }   catch (IOException e) {
+            System.err.println("Ошибка чтения .env файла: " + e.getMessage());
             System.exit(1);
         }
     }
 
+    private static void validateRequired (String... keys)
+    {
+        for (String key : keys) {
+            if (!config.containsKey(key) || config.get(key) == null) {
+                throw new IllegalArgumentException(key + " is required");
+            }
+        }
+    }
+
+    private static String get(String key){
+        return config.get(key);
+    }
+
+    private static String get(String key, String defaultValue){
+        return config.getOrDefault(key, defaultValue);
+    }
+
     public static String getBotUsername() {
-        return botUsername;
+        return get("BOT_USERNAME");
     }
 
     public static String getBotToken() {
-        return botToken;
+        return get("BOT_TOKEN");
+    }
+    public static String getBaseUrl() {
+        return get("BASE_URL");
+    }
+    public static String getGameApiKey() {
+        return get("GAME_API_KEY");
     }
 }
