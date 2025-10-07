@@ -59,5 +59,22 @@ public class GameBrainApiClient {
             return objectMapper.readValue(responseBody, Game.class);
         }
     }
+    public List<Game> getSimilarGames(int gameId) throws IOException {
+        HttpUrl url = HttpUrl.parse(String.format("%s/%s/similar", BASE_URL, gameId));
+
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .addHeader("x-api-key", API_KEY)
+                .build();
+
+        try (Response response = httpClient.newCall(request).execute()) {
+            if (!response.isSuccessful()) throw new IOException("Failed to fetch similar games " + response);
+
+            String responseBody = response.body().string();
+            GameBrainResponse wrapper = objectMapper.readValue(responseBody, GameBrainResponse.class);
+            return wrapper.results;
+        }
+    }
 }
 
