@@ -11,7 +11,7 @@ import java.util.List;
 public class Game {
     private String xUrl;
     private int id;
-    private double year; // в выводе JSON число с плавающей точкой, поэтому используем double
+    private int year;
     private String name;
     private String genre;
     private String image;
@@ -22,6 +22,7 @@ public class Game {
     private List<String> screenshots;
     private String microTrailer;
     private String gameplay;
+    private List<Platform> platforms;
 
     // Пустой конструктор для Jackson
     public Game() {}
@@ -33,8 +34,8 @@ public class Game {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
-    public double getYear() { return year; }
-    public void setYear(double year) { this.year = year; }
+    public int getYear() { return year; }
+    public void setYear(int year) { this.year = year; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -66,16 +67,24 @@ public class Game {
     public String getGameplay() { return gameplay; }
     public void setGameplay(String gameplay) { this.gameplay = gameplay; }
 
+    public List<Platform> getPlatforms() { return platforms; }
+    public void setPlatforms(List<Platform> platforms) { this.platforms = platforms; }
+
     @Override
     public String toString() {
         return String.format(
-                "   %s (%.0f)%n" + // для double
+                "   %s (%d)\n" +
                 "   Жанр: %s\n" +
                 "   Рейтинг: %.2f (%d отзывов)\n" +
+                "   Платформы: %s%n" +
                 "   Описание: %s\n",
                 name, year, genre,
-                rating != null ? rating.getMean() : 0.0, //Выражения ? : Чтобы не упало с NullPointerException
+                rating != null ? rating.mean : 0.0, //Выражения ? : Чтобы не упало с NullPointerException
                 rating != null ? rating.getCountAsInt() : 0,
+                platforms != null ? platforms.stream() //.stream() Превращает platform в поток данных
+                        .map(p -> p.name) // лямбда выражение берёт каждый эл-т p из потока и извлекает p.name
+                        .reduce((a,b) -> a + "," + b) // склеиваем строки
+                        .orElse("-") : "-", //если platforms пуст или null вернёт прочерк
                 shortDescription != null && shortDescription.length() > 100 ? // обрезка описания
                         shortDescription.substring(0, 100) + "..." : shortDescription
         );
