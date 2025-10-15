@@ -15,13 +15,9 @@ public class Game {
     private String name;
     private String genre;
     private String image;
-    private String link;
     private Rating rating;
     private boolean adultOnly;
     private String shortDescription;
-    private List<String> screenshots;
-    private String microTrailer;
-    private String gameplay;
     private List<Platform> platforms;
 
     // Пустой конструктор для Jackson
@@ -46,9 +42,6 @@ public class Game {
     public String getImage() { return image; }
     public void setImage(String image) { this.image = image; }
 
-    public String getLink() { return link; }
-    public void setLink(String link) { this.link = link; }
-
     public Rating getRating() { return rating; }
     public void setRating(Rating rating) { this.rating = rating; }
 
@@ -57,15 +50,6 @@ public class Game {
 
     public String getShortDescription() { return shortDescription; }
     public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
-
-    public List<String> getScreenshots() { return screenshots; }
-    public void setScreenshots(List<String> screenshots) { this.screenshots = screenshots; }
-
-    public String getMicroTrailer() { return microTrailer; }
-    public void setMicroTrailer(String microTrailer) { this.microTrailer = microTrailer; }
-
-    public String getGameplay() { return gameplay; }
-    public void setGameplay(String gameplay) { this.gameplay = gameplay; }
 
     public List<Platform> getPlatforms() { return platforms; }
     public void setPlatforms(List<Platform> platforms) { this.platforms = platforms; }
