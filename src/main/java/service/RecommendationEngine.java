@@ -117,6 +117,7 @@ public class RecommendationEngine {
 
         // Проверка на неоднозначность (Пример с GTA) ну или несколько частей какой-либо игры
         private boolean isAmbiguous(List<Game> games, String query) {
+            if (query.length() < 3) return false; // слишком короткий запрос не должен отрабатывать (например "aa" "ab")
             String queryLower = query.toLowerCase().trim();
 
             long similiarGames = games.stream()
