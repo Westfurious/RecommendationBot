@@ -28,7 +28,7 @@ public class RecommendationEngine {
 
         private SearchResults(Game game, List<Game> alternatives, SearchStatus status) {
             this.game = game;
-            this.alternatives = alternatives;
+            this.alternatives = (alternatives == null) ? List.of() : List.copyOf(alternatives);
             this.status = status;
         }
 
