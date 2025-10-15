@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 
 public class RecommendationEngine {
 
-    private final GameBrainApiClient gameBrainApiClient;
+    private final GameSearchClient gameSearchClient;
 
-    public RecommendationEngine(GameBrainApiClient gameBrainApiClient) {
-        this.gameBrainApiClient = gameBrainApiClient;
+    public RecommendationEngine(GameSearchClient gameSearchClient) {
+        this.gameSearchClient = gameSearchClient;
     }
 
     public static class SearchResults {
@@ -54,7 +54,7 @@ public class RecommendationEngine {
     public SearchResults findBestGame(String query) throws IOException {
 
         // Ничего не нашли
-        List<Game> results = gameBrainApiClient.searchGames(query);
+        List<Game> results = gameSearchClient.searchGames(query);
         if (results.isEmpty()) {
             return SearchResults.notFound();
         }
@@ -92,7 +92,7 @@ public class RecommendationEngine {
                     .sorted(Comparator
                             .comparingDouble((Game g) -> g.getRating().getCount())
                             .reversed())
-                    .collect(Collectors.toList());
+                    .toList();
         }
 
         private Game findExactMatch(List<Game> games, String query) {
@@ -105,12 +105,12 @@ public class RecommendationEngine {
             }
 
             // Почти точное название (Например введёт Dota а выдаст Dota 2)
-            for(Game game : games) {
+            /*for(Game game : games) {
                 String nameLower = game.getName().toLowerCase();
                 if(nameLower.startsWith(queryLower + " ") || nameLower.startsWith(queryLower)) {
                     return game;
                 }
-            }
+            }*/
 
             return null;
         }
@@ -120,11 +120,11 @@ public class RecommendationEngine {
             if (query.length() < 3) return false; // слишком короткий запрос не должен отрабатывать (например "aa" "ab")
             String queryLower = query.toLowerCase().trim();
 
-            long similiarGames = games.stream()
+            long similarGames = games.stream()
                     .filter(g -> g.getName().toLowerCase().startsWith(queryLower))
                     .count();
 
-            return similiarGames >= 2;
+            return similarGames >= 2;
         }
         
         private Game selectBestMatch(List<Game> games) {

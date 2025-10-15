@@ -12,7 +12,7 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.util.List;
 
-public class GameBrainApiClient {
+public class GameBrainApiClient implements GameSearchClient {
     private static final String BASE_URL = BotConfig.getBaseUrl();
     private static final String API_KEY = BotConfig.getGameApiKey();
 

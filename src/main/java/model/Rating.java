@@ -12,7 +12,6 @@ public class Rating {
     private double countPlayers;
     private double countCritics;
 
-    //КОСТЫЛЬ
     public double getMean() { return mean; }
     public double getCount() { return count; }
 }
