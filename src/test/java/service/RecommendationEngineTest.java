@@ -12,15 +12,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RecommendationEngineTest {
 
-    // Вспомогательный метод: создаём игру через СЕТТЕРЫ (как у тебя)
+    // Вспомогательный метод: создаём игру через СЕТТЕРЫ
     private Game createGame(String name, double meanRating, double ratingCount) {
         Game game = new Game();
         game.setName(name);
         game.setShortDescription("Описание для " + name);
 
         Rating rating = new Rating();
-        rating.mean = meanRating;   // поле public — можно напрямую
-        rating.count = ratingCount; // так делает Jackson
+        rating.mean = meanRating;
+        rating.count = ratingCount;
         game.setRating(rating);
 
         return game;
@@ -97,7 +97,7 @@ class RecommendationEngineTest {
     @DisplayName("Все игры отфильтрованы (рейтинг < 100) → NOT_FOUND")
     void shouldReturnNotFoundWhenAllGamesHaveLowRating() throws IOException {
         GameSearchClient mockClient = query -> List.of(
-                createGame("Низкий рейтинг", 5.0, 50) // count = 50 < 100 → будет отфильтровано
+                createGame("Низкий рейтинг", 5.0, 50) // count = 50 < 100 -> будет отфильтровано
         );
         RecommendationEngine engine = new RecommendationEngine(mockClient);
 
