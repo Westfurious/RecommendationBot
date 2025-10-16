@@ -84,7 +84,7 @@ public class RecommendationEngine {
         return SearchResults.found(bestMatch);
 
     }
-        private List<Game> filterValidGames (List<Game> games) {
+    private List<Game> filterValidGames (List<Game> games) {
             return games.stream()
                     .filter(g -> g.getName() != null)
                     .filter(g -> g.getRating() != null && g.getRating().getCount() > 100)

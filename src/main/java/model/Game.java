@@ -9,12 +9,10 @@ import java.util.List;
  */
 @JsonIgnoreProperties(ignoreUnknown = true) // Без этой аннотации Jackson упадёт если увидит поле в Json которого нету в классе
 public class Game {
-    private String xUrl;
     private int id;
     private int year;
     private String name;
     private String genre;
-    private String image;
     private Rating rating;
     private boolean adultOnly;
     private String shortDescription;
@@ -24,8 +22,6 @@ public class Game {
     public Game() {}
 
     // Геттеры и сеттеры
-    public String getXUrl() { return xUrl; }
-    public void setXUrl(String xUrl) { this.xUrl = xUrl; }
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -38,9 +34,6 @@ public class Game {
 
     public String getGenre() { return genre; }
     public void setGenre(String genre) { this.genre = genre; }
-
-    public String getImage() { return image; }
-    public void setImage(String image) { this.image = image; }
 
     public Rating getRating() { return rating; }
     public void setRating(Rating rating) { this.rating = rating; }
