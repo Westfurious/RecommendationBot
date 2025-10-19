@@ -9,27 +9,19 @@ import java.util.List;
  */
 @JsonIgnoreProperties(ignoreUnknown = true) // Без этой аннотации Jackson упадёт если увидит поле в Json которого нету в классе
 public class Game {
-    private String xUrl;
     private int id;
     private int year;
     private String name;
     private String genre;
-    private String image;
-    private String link;
     private Rating rating;
     private boolean adultOnly;
     private String shortDescription;
-    private List<String> screenshots;
-    private String microTrailer;
-    private String gameplay;
     private List<Platform> platforms;
 
     // Пустой конструктор для Jackson
     public Game() {}
 
     // Геттеры и сеттеры
-    public String getXUrl() { return xUrl; }
-    public void setXUrl(String xUrl) { this.xUrl = xUrl; }
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -43,12 +35,6 @@ public class Game {
     public String getGenre() { return genre; }
     public void setGenre(String genre) { this.genre = genre; }
 
-    public String getImage() { return image; }
-    public void setImage(String image) { this.image = image; }
-
-    public String getLink() { return link; }
-    public void setLink(String link) { this.link = link; }
-
     public Rating getRating() { return rating; }
     public void setRating(Rating rating) { this.rating = rating; }
 
@@ -57,15 +43,6 @@ public class Game {
 
     public String getShortDescription() { return shortDescription; }
     public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
-
-    public List<String> getScreenshots() { return screenshots; }
-    public void setScreenshots(List<String> screenshots) { this.screenshots = screenshots; }
-
-    public String getMicroTrailer() { return microTrailer; }
-    public void setMicroTrailer(String microTrailer) { this.microTrailer = microTrailer; }
-
-    public String getGameplay() { return gameplay; }
-    public void setGameplay(String gameplay) { this.gameplay = gameplay; }
 
     public List<Platform> getPlatforms() { return platforms; }
     public void setPlatforms(List<Platform> platforms) { this.platforms = platforms; }

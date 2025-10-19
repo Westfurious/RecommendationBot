@@ -28,7 +28,7 @@ public class BotConfig {
                 config.put(key, value);}
             }
 
-            validateRequired("BOT_USERNAME", "BOT_TOKEN");
+            validateRequired("BOT_USERNAME", "BOT_TOKEN", "BASE_URL", "GAME_API_KEY");
 
         }   catch (IOException e) {
             System.err.println("Ошибка чтения .env файла: " + e.getMessage());

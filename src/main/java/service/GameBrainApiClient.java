@@ -12,7 +12,7 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.util.List;
 
-public class GameBrainApiClient {
+public class GameBrainApiClient implements GameSearchClient {
     private static final String BASE_URL = BotConfig.getBaseUrl();
     private static final String API_KEY = BotConfig.getGameApiKey();
 
@@ -26,13 +26,14 @@ public class GameBrainApiClient {
         HttpUrl url = HttpUrl.parse(BASE_URL)
                 .newBuilder()
                 .addQueryParameter("query", query)
-                .addQueryParameter("limit", "1")
+                .addQueryParameter("limit", "10")
                 .build();
 
         Request request = new Request.Builder()
                 .url(url)
                 .get()
                 .addHeader("x-api-key", API_KEY)
+                .addHeader("User-Agent", "GameMovieBot/1.0")
                 .build();
 
         try (Response response = httpClient.newCall(request).execute()) {
@@ -50,6 +51,7 @@ public class GameBrainApiClient {
                 .url(url)
                 .get()
                 .addHeader("x-api-key", API_KEY)
+                .addHeader("User-Agent", "GameMovieBot/1.0")
                 .build();
 
         try (Response response = httpClient.newCall(request).execute()) {
@@ -66,6 +68,7 @@ public class GameBrainApiClient {
                 .url(url)
                 .get()
                 .addHeader("x-api-key", API_KEY)
+                .addHeader("User-Agent", "GameMovieBot/1.0")
                 .build();
 
         try (Response response = httpClient.newCall(request).execute()) {
